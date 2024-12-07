@@ -112,17 +112,17 @@ public class MyString {
 
     public static String remove(String str1, String str2) {
         if (str1 == null || str1.isEmpty()) 
-            return str2; 
+            return ""; 
         if (str2 == null || str2.isEmpty()) 
             return str1; 
-        String newstring = ""; 
-        for (int i = 0; i < str1.length(); i++) {
-            char ch = str1.charAt(i);
-            if (!str2.contains(String.valueOf(ch))) {
-                newstring += ch;
+        StringBuilder result = new StringBuilder(str1);
+        for (char ch : str2.toCharArray()) {
+            int index = result.indexOf(String.valueOf(ch));
+            if (index != -1) {
+                result.deleteCharAt(index); 
             }
         }
-        return newstring;
+        return result.toString();
     }
 
     /**
