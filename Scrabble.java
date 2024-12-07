@@ -95,40 +95,39 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int n = hand.length();
 		int score = 0;
-		// Declares the variable in to refer to an object of type In, and initializes it to represent
-		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
 		In in = new In();
-		while (hand.length() > 0) {
+		while (!hand.isEmpty()) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
 			String input = in.readString().toLowerCase();
-			if (input.equals(".")) 
-				break;
-				if (!MyString.subsetOf(input, hand)) {
-					System.out.println("Invalid word. Try again.");
-					continue;}
-				if (!isWordInDictionary(input)) {
-					System.out.println("No such word in the dictionary. Try again.");
-					continue;}
-				int wordScore = wordScore(input);
-				score += wordScore;
-				hand = MyString.remove(hand, input);
-				System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
+			if (input.equals("."))
+				break; 
+			if (!MyString.subsetOf(input, hand)) {
+				System.out.println("Invalid word. Try again.");
+				continue;
 			}
-			System.out.println("End of hand. Total score: " + score + " points");
+			if (!isWordInDictionary(input)) {
+				System.out.println("No such word in the dictionary. Try again.");
+				continue;
+			}
+			int wordScore = wordScore(input);
+			score += wordScore;
+			hand = MyString.remove(hand, input);
+			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
+		}
+		System.out.println("End of hand. Total score: " + score + " points");
 	}
-
+	
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
 	// to end the game. If the user enters any other input, writes an error message.
 	public static void playGame() {
-		init(); // Initialize the dictionary
+		init();
 		In in = new In();
 		while (true) {
 			System.out.println("Enter 'n' to deal a new hand, or 'e' to end the game:");
 			String input = in.readString().toLowerCase();
-
+	
 			if (input.equals("e")) {
 				System.out.println("Thanks for playing!");
 				break;
@@ -140,14 +139,15 @@ public class Scrabble {
 			}
 		}
 	}
+	
 
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
-		////testBuildingTheDictionary();  
+		testBuildingTheDictionary();  
 		testScrabbleScore();    
-		////testCreateHands();  
-		////testPlayHands();
-		////playGame();
+		testCreateHands();  
+		testPlayHands();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
