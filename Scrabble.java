@@ -132,33 +132,24 @@ public class Scrabble {
 	
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
 	// to end the game. If the user enters any other input, writes an error message.
-	public static void playGame() {
-		init(); 
-		In in = new In();
-		boolean firstPrompt = true;
-	
-		while (true) {
-			if (!firstPrompt) {
-				System.out.println("Enter 'n' to deal a new hand, or 'e' to end the game:");
-			}
-			firstPrompt = false;
-	
-			String input = in.readString().toLowerCase();
-	
-			if (input.equals("e")) {
-				System.out.println("playGame() method exists and can be called");
-				break;
-			} else if (input.equals("n")) {
-				String hand = createHand();
-				playHand(hand);
-			} else {
-				System.out.println("Invalid input. Please enter 'n' or 'e'.");
-			}
-		}
-	}
-	
-	
-	
+	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
+// to end the game. If the user enters any other input, writes an error message.
+public static void playGame() {
+    init(); 
+    In in = new In(); 
+    while (true) {
+        System.out.println("Enter 'n' to deal a new hand, or 'e' to end the game:");
+        String input = in.readString().toLowerCase();
+        if (input.equals("e")) {
+            break;
+        } else if (input.equals("n")) {
+            String hand = createHand();
+            playHand(hand);
+        } else {
+            System.out.println("Invalid input. Please enter 'n' or 'e'.");
+        }
+    }
+}
 
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
