@@ -52,16 +52,16 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        if (str2.isEmpty() || str2 == null || str1.isEmpty() || str1 == null)
-            return false;
-        for(char c : str1.toCharArray()){
-            if (countChar(str1, c) > countChar(str2, c))  {
-                return false;
+        if (str1 == null || str2 == null) 
+            return false; 
+        if (str1.isEmpty()) 
+            return true; 
+        for (char c : str1.toCharArray()) {
+            if (countChar(str1, c) > countChar(str2, c)) 
+                return false; 
             }
+            return true;
         }
-        return true;
-    }
-    
 
     /** Returns a string which is the same as the given string, with a space
      * character inserted after each character in the given string, except
@@ -73,10 +73,10 @@ public class MyString {
      */
     public static String spacedString(String str) {
         String news = "";
-        for (int i =0; i < str.length(); i++){
+        for (int i = 0; i < str.length(); i++) {
             news += str.charAt(i);
-            news += " ";
-        }
+            if (i < str.length() - 1) 
+                news += " ";}
         return news;
     }
   
@@ -111,13 +111,15 @@ public class MyString {
      */
 
     public static String remove(String str1, String str2) {
-        if (str1.isEmpty() || str1 == null)
-            return str2;
+        if (str1 == null || str1.isEmpty()) 
+            return str2; 
+        if (str2 == null || str2.isEmpty()) 
+            return str1; 
         String newstring = ""; 
-        for (int i = 0; i < str2.length(); i++) {
-            char ch = str2.charAt(i);
-            if ((countChar(str1, ch) == 0 || countChar(str1, ch) < countChar(str2, ch)) && !newstring.contains(String.valueOf(ch))) { 
-                newstring += ch; 
+        for (int i = 0; i < str1.length(); i++) {
+            char ch = str1.charAt(i);
+            if (!str2.contains(String.valueOf(ch))) {
+                newstring += ch;
             }
         }
         return newstring;
