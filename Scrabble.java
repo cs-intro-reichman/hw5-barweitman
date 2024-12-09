@@ -100,8 +100,9 @@ public class Scrabble {
 		Scanner scanner = new Scanner(System.in);
 	
 		while (!hand.isEmpty()) {
-			System.out.println("Current Hand: " + MyString.spacedString(hand).trim());
-			System.out.println("Enter a word, or '.' to finish playing this hand:");	
+			String currentHandOutput = "Current Hand: " + MyString.spacedString(hand).trim();
+			System.out.println(currentHandOutput);	
+			System.out.println("Enter a word, or '.' to finish playing this hand:");
 			String input = scanner.nextLine().trim().toLowerCase();
 	
 			if (input.equals(".")) {
@@ -117,12 +118,16 @@ public class Scrabble {
 			}
 	
 			int wordScore = wordScore(input);
-			score += wordScore;	
+			score += wordScore;
 			hand = MyString.remove(hand, input).trim();
-			System.out.println(input.trim() + " earned " + wordScore + " points. Score: " + score + " points");
+	
+			String wordOutput = input + " earned " + wordScore + " points. Score: " + score + " points";
+			System.out.println(wordOutput);
 		}
-			System.out.println("End of hand. Total score: " + score + " points");
+		String finalOutput = "End of hand. Total score: " + score + " points";
+		System.out.println(finalOutput);
 	}
+	
 	
 	
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
