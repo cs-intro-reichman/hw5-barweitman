@@ -3,6 +3,7 @@
  */
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Scrabble {
 
@@ -95,32 +96,33 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int score = 0; 
-		In in = new In();
-	
-		while (!hand.isEmpty()) {
-			System.out.println("Current Hand: " + MyString.spacedString(hand));
-			System.out.println("Enter a word, or '.' to finish playing this hand:");
-			String input = in.readString().toLowerCase();
-			if (input.equals(".")) {
-				break; 
-			}
-			if (!MyString.subsetOf(input, hand)) {
-				System.out.println("Invalid word. Try again.");
-				continue;
-			}
-			if (!isWordInDictionary(input)) {
-				System.out.println("No such word in the dictionary. Try again.");
-				continue;
-			}
-			int wordScore = wordScore(input);
-			score += wordScore;
-			hand = MyString.remove(hand, input);
-			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
-		}
-	
-		System.out.println("End of hand. Total score: " + score + " points");
-	}
+    int score = 0; 
+    Scanner scanner = new Scanner(System.in);
+
+    while (!hand.isEmpty()) {
+        System.out.println("Current Hand: " + MyString.spacedString(hand));
+        System.out.println("Enter a word, or '.' to finish playing this hand:");
+        String input = scanner.nextLine().toLowerCase();
+        if (input.equals(".")) {
+            break; 
+        }
+        if (!MyString.subsetOf(input, hand)) {
+            System.out.println("Invalid word. Try again.");
+            continue;
+        }
+        if (!isWordInDictionary(input)) {
+            System.out.println("No such word in the dictionary. Try again.");
+            continue;
+        }
+        int wordScore = wordScore(input);
+        score += wordScore;
+        hand = MyString.remove(hand, input);
+        System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
+    }
+
+    System.out.println("End of hand. Total score: " + score + " points");
+}
+
 	
 	
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
