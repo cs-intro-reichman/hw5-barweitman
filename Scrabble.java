@@ -133,7 +133,7 @@ public static void playGame() {
     init(); 
     In in = new In(); 
     while (true) {
-        System.out.println("Enter 'n' to deal a new hand, or 'e' to end the game:");
+        System.out.println("Enter n to deal a new hand, or e to end the game:");
         String input = in.readString().toLowerCase();
         if (input.equals("e")) {
             break;
@@ -141,7 +141,7 @@ public static void playGame() {
             String hand = createHand();
             playHand(hand);
         } else {
-            System.out.println("Invalid input. Please enter 'n' or 'e'.");
+            System.out.println("Invalid input. Please enter n or e.");
         }
     }
 }
