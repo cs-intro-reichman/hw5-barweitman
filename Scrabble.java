@@ -97,43 +97,35 @@ public class Scrabble {
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
 		int score = 0;
-		Scanner scanner = new Scanner(System.in); 
-		boolean wordValid;
-	
+		In in = new In(); 
 		while (!hand.isEmpty()) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
-			System.out.println("Enter a word, or '.' to finish playing this hand:");	
-			String input = scanner.nextLine().trim();	
+			System.out.println("Enter a word, or '.' to finish playing this hand:");
+			String input = in.readString().trim(); 
 			if (input.equals(".")) {
-				break;
-			}
-			wordValid = false;
-			for (String dictionaryWord : DICTIONARY) {
-				if (dictionaryWord != null && input.equals(dictionaryWord)) {
-					wordValid = true;
-					break;
-				}
-			}
-			if (!wordValid) {
-				System.out.println("No such word in the dictionary. Try again.");
-				continue;
+				break; 
 			}
 			if (!MyString.subsetOf(input, hand)) {
 				System.out.println("Invalid word. Try again.");
 				continue;
 			}	
+			if (!isWordInDictionary(input)) {
+				System.out.println("No such word in the dictionary. Try again.");
+				continue;
+			}
 			int wordScore = wordScore(input);
-			score += wordScore;	
-			hand = MyString.remove(hand, input);	
+			score += wordScore;
+			hand = MyString.remove(hand, input);
 			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
 			System.out.println();
-		}
-			if (hand.isEmpty()) {
+		}	
+		if (hand.isEmpty()) {
 			System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
 			System.out.println("End of hand. Total score: " + score + " points");
 		}
 	}
+	
 	
 	
 	
