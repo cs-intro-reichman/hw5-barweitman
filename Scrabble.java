@@ -103,6 +103,7 @@ public class Scrabble {
 			String currentHandOutput = "Current Hand: " + MyString.spacedString(hand).trim();
 			System.out.println(currentHandOutput);	
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
+			System.out.println();
 			String input = scanner.nextLine().trim().toLowerCase();
 	
 			if (input.equals(".")) {
