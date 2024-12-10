@@ -96,37 +96,40 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int score = 0;
-		Scanner scanner = new Scanner(System.in);
-	
+		int score = 0; 
+		In in = new In();
+		boolean wordv = false;
+
 		while (!hand.isEmpty()) {
-			String currentHandOutput = "Current Hand: " + MyString.spacedString(hand).trim();
-			System.out.println(currentHandOutput);	
+			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
-			System.out.println();
-			String input = scanner.nextLine().trim().toLowerCase();
-	
+			String input = in.readString().toLowerCase();
 			if (input.equals(".")) {
-				break;
+				break; 
 			}
-			if (!MyString.subsetOf(input, hand)) {
+			for (int i = 0; i < DICTIONARY.length; i++){
+				if (input.equals(DICTIONARY[i])){
+					wordv = true;
+					hand = MyString.remove(hand, input);
+					int wordScore = wordScore(input);
+					score += wordScore;
+					System.out.println("train earned " + wordScore + " points. Score: " + score + " points");
+					System.out.println();
+					break;
+				}
+			}
+			if (!wordv) {
 				System.out.println("Invalid word. Try again.");
-				continue;
 			}
 			if (!isWordInDictionary(input)) {
 				System.out.println("No such word in the dictionary. Try again.");
 				continue;
 			}
-	
-			int wordScore = wordScore(input);
-			score += wordScore;
-			hand = MyString.remove(hand, input).trim();
-	
-			String wordOutput = input + " earned " + wordScore + " points. Score: " + score + " points";
-			System.out.println(wordOutput);
 		}
-		String finalOutput = "End of hand. Total score: " + score + " points";
-		System.out.println(finalOutput);
+		if (hand.length() == 0){
+			System.out.println("Ran out of letters. Total score: " + score + " points");
+		}else
+		System.out.println("End of hand. Total score: " + score + " points");
 	}
 	
 	
